@@ -5,8 +5,10 @@
   "main": "",
   "scripts": {
     "test": "npm test",
-    "img-gen": "node ./generators/img",
-    "json-gen": "node ./generators/json"
+    "gen-img": "node ./generators/img",
+    "gen-json": "node ./generators/json",
+    "seed-mongo": "node ./seeders/mongo",
+    "seed-maria": "node ./seeders/maria"
   },
   "repository": {
     "type": "git",
