@@ -1,26 +1,34 @@
 const fs = require('fs');
+const faker = require('faker');
 
-const count = process.argv[2] || 10;
-const stream = fs.createWriteStream('./json-gen/data.json', {'flags': 'a'});
+const listings = process.argv[2] || 10;
+const slides = process.argv[3] || 10;
 
-stream.write('[')
+fs.writeFile('./generators/json/data.json', '[', err => {
+  if (err) { console.log(err);}
+});
 
-for (let i = 0; i < count; i++) {
-  let comma = ',';
-  let sample = {
-    imgId: i,
-    listingId: i,
-    imgOrder: 0,
-    description: ''
-  };
+const stream = fs.createWriteStream('./generators/json/data.json', {'flags': 'a'});
 
-  if (i === count - 1) {
-    comma = ''
+for (let h = 0; h < listings; h++) {
+  for (let i = 0; i < slides; i++) {
+    let comma = ',';
+    let sample = {
+      imgId: Math.floor(Math.random() * 100),
+      listingId: h,
+      imgOrder: i,
+      description: faker.fake("{{random.words}}, {{random.words}}, {{random.words}}")
+    };
+
+    if (h === listings - 1 && i === slides - 1 ) {
+      comma = ''
+    }
+
+    stream.write('\n\t' + JSON.stringify(sample) + comma);
   }
-
-  stream.write(JSON.stringify(sample) + comma);
 }
 
-stream.write(']')
+
+stream.write('\n]')
 
 
