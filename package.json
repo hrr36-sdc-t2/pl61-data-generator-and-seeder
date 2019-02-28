@@ -1,0 +1,23 @@
+{
+  "name": "pl61-data-generator-and-seeder",
+  "version": "1.0.0",
+  "description": "generates 10 million primary data entries (JSON) and insert them into database",
+  "main": "./gen/index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrr36-sdc-t2/pl61-data-generator-and-seeder.git"
+  },
+  "author": "pl61",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hrr36-sdc-t2/pl61-data-generator-and-seeder/issues"
+  },
+  "homepage": "https://github.com/hrr36-sdc-t2/pl61-data-generator-and-seeder#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "request": "^2.88.0"
+  }
+}
