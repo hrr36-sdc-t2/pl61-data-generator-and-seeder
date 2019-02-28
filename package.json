@@ -2,9 +2,11 @@
   "name": "pl61-data-generator-and-seeder",
   "version": "1.0.0",
   "description": "generates 10 million primary data entries (JSON) and insert them into database",
-  "main": "./gen/index.js",
+  "main": "",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "img-gen": "node ./generators/img",
+    "json-gen": "node ./generators/json"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   "homepage": "https://github.com/hrr36-sdc-t2/pl61-data-generator-and-seeder#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "mongoose": "^5.4.16",
     "request": "^2.88.0"
   }
 }
