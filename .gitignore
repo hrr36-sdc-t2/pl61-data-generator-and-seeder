@@ -1,2 +1,5 @@
 node_modules
 /img/img
+/seeders/mongo/old
+/seeders/maria/old
+test.js

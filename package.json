@@ -8,7 +8,9 @@
     "gen-img": "node ./generators/img",
     "gen-json": "node ./generators/json",
     "seed-mongo": "node ./seeders/mongo",
-    "seed-maria": "node ./seeders/maria"
+    "seed-mongo-spawn": "node ./seeders/mongo/seed.js",
+    "seed-maria": "node ./seeders/maria",
+    "query-mongo": "node ./seeders/mongo/query.js"
   },
   "repository": {
     "type": "git",

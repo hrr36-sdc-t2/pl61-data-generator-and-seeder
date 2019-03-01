@@ -1,58 +1,48 @@
+const childProcess = require('child_process');
 const mongoose = require('mongoose');
-const faker = require('faker');
 
-const { Slide, Listing } = require('./schema.js');
+const Listing = require('./schema.js');
 
-const images = process.argv[2] || 100000000;
-const chunk = 1000;
-let inserted = 0;
+const itemsPerWorker = process.argv[2] || 5000000;
+const itemsPerInsert = process.argv[3] || 1000;
+const workers = { ended: 0 };
+const workerCount = 2;
 
 const CONNECTION_URI = process.env.MONGODB_URI || 'mongodb://localhost/sdc2';
 
-const generateSlides = chunk => {
-  const arr = [];
-
-  for (let i = 0; i < chunk; i++) {
-    arr.push({
-      listingId: Math.floor(i / 10),
-      imgPath: Math.floor(Math.random() * 100),
-      description: faker.lorem.sentence()
-    });
-  }
-
-  return arr;
-}
-
-const randomizeSlide = (arr, inserted) => {
-  for (let i = 0; i < arr.length; i++) {
-    arr[i].listingId = Math.floor((i + inserted) / 10);
-    arr[i].imgPath = Math.floor(Math.random() * 100);
-    arr[i].description = faker.lorem.sentence();
-    delete arr[i]._id;
-  }
-}
-
-mongoose.connect(CONNECTION_URI, {
-  useNewUrlParser: true,
-  poolSize: 10
-})
+mongoose
+  .connect(CONNECTION_URI, { useNewUrlParser: true })
   .then(async () => {
-    console.log('>>>>>>>> connected <<<<<<<<')
-
-    await Slide.deleteMany({});
     await Listing.deleteMany({});
 
-    let time = new Date(Date.now());
+    const time = Date.now();
 
-    const arr = generateSlides(chunk);
-
-    while (inserted < images) {
-      console.log(inserted);
-      await Slide.insertMany(arr);
-      inserted += chunk;
-      randomizeSlide(arr, inserted);
+    for (let i = 0; i < workerCount; i++) {
+      workers[i] = childProcess.spawn('npm', ['run', 'seed-mongo-spawn', itemsPerWorker * i, itemsPerWorker, itemsPerInsert]);
+      console.log(`worker${i} spawned`);
     }
 
-    console.log((Date.now() - time) / 1000, 's');
+    workers[0].on('close', code => {
+      console.log(`worker0 process exited with code ${code}`);
+      workers.ended++
+
+      if (workers.ended === workerCount) {
+        console.log((Date.now() - time) / 1000, 's');
+        process.exit();
+      }
+    });
+
+    workers[1].on('close', code => {
+      console.log(`worker1 process exited with code ${code}`);
+      workers.ended++
+
+      if (workers.ended === workerCount) {
+        console.log((Date.now() - time) / 1000, 's');
+        process.exit();
+      }
+    });
   })
-  .catch(err => console.log(err));
+  .catch(err => {
+    console.log(err);
+    process.exit();
+  });
