@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const faker = require('faker');
 
 const { Slide, Listing } = require('./schema.js');
 
-const images = process.argv[2] || 1000000;
-const chunk = 20;
+const images = process.argv[2] || 100000000;
+const chunk = 1000;
 let inserted = 0;
 
 const CONNECTION_URI = process.env.MONGODB_URI || 'mongodb://localhost/sdc2';
@@ -15,7 +16,7 @@ const generateSlides = chunk => {
     arr.push({
       listingId: Math.floor(i / 10),
       imgPath: Math.floor(Math.random() * 100),
-      description: 0
+      description: faker.lorem.sentence()
     });
   }
 
@@ -26,7 +27,7 @@ const randomizeSlide = (arr, inserted) => {
   for (let i = 0; i < arr.length; i++) {
     arr[i].listingId = Math.floor((i + inserted) / 10);
     arr[i].imgPath = Math.floor(Math.random() * 100);
-    arr[i].description = 0;
+    arr[i].description = faker.lorem.sentence();
     delete arr[i]._id;
   }
 }
@@ -38,19 +39,15 @@ mongoose.connect(CONNECTION_URI, {
   .then(async () => {
     console.log('>>>>>>>> connected <<<<<<<<')
 
-    Slide.deleteMany({}, err => {
-      if (err) { console.log(err); }
-    });
-
-    Listing.collection.deleteMany({}, err => {
-      if (err) { console.log(err); }
-    });
+    await Slide.deleteMany({});
+    await Listing.deleteMany({});
 
     let time = new Date(Date.now());
 
     const arr = generateSlides(chunk);
 
     while (inserted < images) {
+      console.log(inserted);
       await Slide.insertMany(arr);
       inserted += chunk;
       randomizeSlide(arr, inserted);
