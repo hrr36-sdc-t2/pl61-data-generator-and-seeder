@@ -1,3 +1,2 @@
 node_modules
-generators/img/img
-generators/json/data.json
+/img/img
