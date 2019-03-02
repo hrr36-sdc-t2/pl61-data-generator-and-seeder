@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
     })
     .then(() => knex.schema.createTable('images', t => {
       t.increments('imgId').unsigned().primary();
+      t.integer('listingId').unsigned().index().references('listingId').inTable('listings');
       t.integer('imgPath');
       t.string('description');
     }));
