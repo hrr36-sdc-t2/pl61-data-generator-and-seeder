@@ -19,7 +19,7 @@ mongoose
   Listing.find({ [field]: value })
   .then(res => {
     console.log(res);
-    fs.writeFileSync('./output.json', JSON.stringify(res, null, 2), err => {
+    fs.writeFileSync('./db/mongo/output.json', JSON.stringify(res, null, 2), err => {
       if (err) {
         console.log(err);
         process.exit();
