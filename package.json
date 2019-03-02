@@ -5,12 +5,11 @@
   "main": "",
   "scripts": {
     "test": "npm test",
-    "gen-img": "node ./generators/img",
-    "gen-json": "node ./generators/json",
-    "seed-mongo": "node ./seeders/mongo",
-    "seed-mongo-spawn": "node ./seeders/mongo/seed.js",
-    "seed-maria": "node ./seeders/maria",
-    "query-mongo": "node ./seeders/mongo/query.js"
+    "gen-img": "node ./img",
+    "seed-mongo": "node ./db/mongo",
+    "seed-mongo-spawn": "node ./db/mongo/seed.js",
+    "seed-mysql": "node ./db/mysql",
+    "query-mongo": "node ./db/mongo/query.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +24,10 @@
   "dependencies": {
     "express": "^4.16.4",
     "faker": "^4.1.0",
+    "knex": "^0.16.3",
+    "mariadb": "^2.0.3",
     "mongoose": "^5.4.16",
+    "mysql2": "^1.6.5",
     "request": "^2.88.0"
   }
 }

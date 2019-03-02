@@ -1,5 +1,5 @@
 # pl61-data-generator-and-seeder
-> Generates fake data for seeding into MongoDB or MariaDB instances
+> Generates fake data for seeding into MongoDB or MySQL instances
 
 ## Related Projects
 
