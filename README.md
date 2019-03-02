@@ -1,5 +1,12 @@
 # pl61-data-generator-and-seeder
-> Generates fake data for seeding into MongoDB or MySQL instances
+Generates fake data for seeding into MongoDB or MySQL instances
+10 million primary records with ~90 million secondary records
+MongoDB
+  - insertion time on 2 workers: 100-120 min
+  - query time for primary records: ~30 ms
+MySQL
+  - insertion time: ?
+  - query time: ?
 
 ## Related Projects
 
