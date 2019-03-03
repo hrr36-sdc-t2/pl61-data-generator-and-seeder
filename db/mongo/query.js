@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const fs = require('fs');
+
 const Listing = require('./schema.js');
 
 const field = process.argv[2] || 'listingId';
@@ -22,7 +23,7 @@ mongoose
       fs.writeFileSync('./db/mongo/output.json', JSON.stringify(res, null, 2), err => {
         if (err) {
           console.log(err);
-          process.exit();
+          process.exit(1);
         }
       });
       console.log(`found ${res.length} item${res.length > 1 ? 's' : ''} in ${Date.now() - time} ms`);
@@ -31,5 +32,5 @@ mongoose
   })
   .catch(err => {
     console.log(err);
-    process.exit();
+    process.exit(1);
   });

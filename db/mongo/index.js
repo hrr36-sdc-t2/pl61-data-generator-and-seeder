@@ -27,7 +27,7 @@ mongoose
       workers.ended++
 
       if (workers.ended === workerCount) {
-        console.log((Date.now() - time) / 1000, 's');
+        console.log((Date.now() - time) / 1000 + 's');
         process.exit();
       }
     });
@@ -37,12 +37,12 @@ mongoose
       workers.ended++
 
       if (workers.ended === workerCount) {
-        console.log((Date.now() - time) / 1000, 's');
+        console.log((Date.now() - time) / 1000 + 's');
         process.exit();
       }
     });
   })
   .catch(err => {
     console.log(err);
-    process.exit();
+    process.exit(1);
   });

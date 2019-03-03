@@ -8,6 +8,8 @@ const knex = require('knex')({
 
 knex.raw('CREATE DATABASE IF NOT EXISTS sdc2')
   .then(() => knex.raw('USE sdc2'))
+  .then(() => knex.raw('DROP TABLE IF EXISTS images'))
+  .then(() => knex.raw('DROP TABLE IF EXISTS listings'))
   .then(() => knex.schema.createTable('listings', t => {
     t.increments('listingId').unsigned().primary();
   }))
@@ -18,4 +20,7 @@ knex.raw('CREATE DATABASE IF NOT EXISTS sdc2')
     t.string('description');
   }))
   .then(() => knex.destroy())
-  .catch(err => console.log(err));
+  .catch(err => {
+    console.log(err);
+    process.exit(1);
+  });
