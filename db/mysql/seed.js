@@ -9,7 +9,7 @@ const knex = require('knex')({
 });
 
 const itemsAlreadyInserted = Number(process.argv[2]) || 0;
-const itemsToInsert = Number(process.argv[3]) || 5000000;
+const itemsToInsert = Number(process.argv[3]) || 2500000;
 const chunk = Number(process.argv[4]) || 1000;
 
 let listingInserted = 0;
@@ -33,7 +33,7 @@ const generateSlides = () => {
 
   for (let i = 0; i < count; i++) {
     const images = 6 + Math.ceil(Math.random() * 6);
-    const listingId = itemsAlreadyInserted + i;
+    const listingId = itemsAlreadyInserted + i + 1;
 
     for (let j = 0; j < images; j++) {
       slides.push({
@@ -49,7 +49,7 @@ const generateSlides = () => {
 
 const randomizeSlides = slides => {
   for (let i = 0; i < slides.length; i++) {
-    slides[i].listingId += chunk / 10;
+    slides[i].listingId = String(Number(slides[i].listingId) + chunk / 10);
     slides[i].imgPath = Math.floor(Math.random() * 100),
     slides[i].description = faker.lorem.sentence();
   }
@@ -87,14 +87,14 @@ insertListing(listings)
     insertSlides(slides)
       .then(() => {
         console.log((Date.now() - time) / 1000 + 's');
-        knex.destroy();
+        process.exit();
       })
       .catch(err => {
         console.log(err);
-        knex.destroy();
+        process.exit(1);
       });
   })
   .catch(err => {
     console.log(err);
-    knex.destroy();
+    process.exit(1);
   });

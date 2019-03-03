@@ -15,13 +15,12 @@ knex.raw('CREATE DATABASE IF NOT EXISTS sdc2')
   }))
   .then(() => knex.schema.createTable('images', t => {
     t.increments('imgId').unsigned().primary();
-    t.integer('listingId').unsigned()
-    // .references('listingId').inTable('listings');
+    t.integer('listingId').unsigned().index().references('listingId').inTable('listings');
     t.integer('imgPath');
     t.string('description');
   }))
   .then(() => knex.destroy())
   .catch(err => {
     console.log(err);
-    process.exit();
+    process.exit(1);
   });

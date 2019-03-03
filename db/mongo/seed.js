@@ -6,6 +6,7 @@ const Listing = require('./schema.js');
 const itemsAlreadyInserted = Number(process.argv[2]) || 0;
 const itemsToInsert = Number(process.argv[3]) || 5000000;
 const chunk = Number(process.argv[4]) || 1000;
+
 let inserted = 0;
 
 const CONNECTION_URI = process.env.MONGODB_URI || 'mongodb://localhost/sdc2';
@@ -69,5 +70,5 @@ mongoose
   })
   .catch(err => {
     console.log(err);
-    process.exit();
+    process.exit(1);
   });
