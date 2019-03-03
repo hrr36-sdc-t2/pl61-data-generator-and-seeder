@@ -8,10 +8,13 @@ const knex = require('knex')({
   }
 });
 
+const field = process.argv[2] || 'listingId';
+const value = process.argv[3] || '1';
+
 const time = Date.now();
 
 knex('images')
-  .where({ listingId : 54294 }).select()
+  .where({ [field] : value }).select()
   .then(res => {
     console.log(res);
     fs.writeFileSync('./db/mysql/output.json', JSON.stringify(res, null, 2), err => {
