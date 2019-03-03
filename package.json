@@ -8,7 +8,8 @@
     "gen-img": "node ./img",
     "seed-mongo": "node ./db/mongo",
     "seed-mongo-spawn": "node ./db/mongo/seed.js",
-    "seed-mysql": "node ./db/mysql/schema.js",
+    "seed-mysql": "node ./db/mysql/schema.js && node ./db/mysql",
+    "seed-mysql-spawn": "node ./db/mysql/seed.js",
     "query-mongo": "node ./db/mongo/query.js"
   },
   "repository": {

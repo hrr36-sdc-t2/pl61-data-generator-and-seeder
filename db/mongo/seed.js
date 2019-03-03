@@ -54,7 +54,7 @@ mongoose
   .then(async () => {
     console.log('>>>>>>>> connected <<<<<<<<')
 
-    let time = Date.now();
+    const time = Date.now();
 
     const listings = generateListing();
 
@@ -64,7 +64,7 @@ mongoose
       randomizeListing(listings);
     }
 
-    console.log((Date.now() - time) / 1000, 's');
+    console.log((Date.now() - time) / 1000 + 's');
     process.exit();
   })
   .catch(err => {
