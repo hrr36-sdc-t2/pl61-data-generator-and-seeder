@@ -14,7 +14,7 @@ knex('images')
   .where({ listingId : 54294 }).select()
   .then(res => {
     console.log(res);
-    fs.writeFileSync('./db/mongo/output.json', JSON.stringify(res, null, 2), err => {
+    fs.writeFileSync('./db/mysql/output.json', JSON.stringify(res, null, 2), err => {
       if (err) {
         console.log(err);
         process.exit(1);
