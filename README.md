@@ -28,9 +28,11 @@ seed-mysql <items per worker (4 workers)> <batch insert size>
 query-mongo <column> <value>
 query-mysql <column> <value>
 ```
-Seed scripts accept optional arguments. Default settings insert a total of 10 million primary records and ~90 million secondary records in batch size of 1000 at a time.
+Seed scripts accept optional arguments. Default settings insert a total of 10 million primary records and ~90 million secondary records in batch sizes of 1000.
 
-Query script accet optional arguments. Default use a predetermined query. For MongoDB, query is on primary records. For MySQL, query is on secondary records.
+Query script accept optional arguments. Default uses a predetermined query. For MongoDB, query is on primary records. For MySQL, query is on secondary records.
+
+Respective databases are created if do not exist when seed scripts are run.
 
 ## Requirements
 
@@ -49,4 +51,3 @@ From within the root directory:
 ```sh
 npm install
 ```
-Databases are created if do not exist when seed scripts are run.
