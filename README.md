@@ -7,7 +7,7 @@ MongoDB
 
 MySQL
   - data generation and insertion time (4 workers): ~25-30 min
-  - query time (5-11 records from 90 million secondary): ~50 ms
+  - query time (7-12 records from 90 million secondary): ~50 ms
 
 ## Related Projects
 

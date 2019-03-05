@@ -6,7 +6,7 @@ const slideSchema = mongoose.Schema({
 });
 
 const listingSchema = mongoose.Schema({
-  listingId: { type: Number, index: true },
+  listingId: { type: Number, index: true, unique: true },
   images: [slideSchema]
 });
 
