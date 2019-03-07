@@ -1,5 +1,5 @@
 # pl61-data-generator-and-seeder
-Generates fake data for seeding into MongoDB or MySQL instances, 10 million primary records with ~90 million secondary records.
+Generates fake data for seeding into MongoDB or MySQL instances, 10 million primary records with ~95 million secondary records.
 
 MongoDB
   - data generation and insertion time (2 workers): 100-120 min
@@ -7,7 +7,7 @@ MongoDB
 
 MySQL
   - data generation and insertion time (4 workers): ~25-30 min
-  - query time (7-12 records from 90 million secondary): ~50 ms
+  - query time (7-12 records from 95 million secondary): ~50 ms
 
 ## Related Projects
 
@@ -28,7 +28,7 @@ seed-mysql <items per worker (4 workers)> <batch insert size>
 query-mongo <column> <value>
 query-mysql <column> <value>
 ```
-Seed scripts accept optional arguments. Default settings insert a total of 10 million primary records and ~90 million secondary records in batch sizes of 1000.
+Seed scripts accept optional arguments. Default settings insert a total of 10 million primary records and ~95 million secondary records in batch sizes of 1000.
 
 Query script accept optional arguments. Default uses a predetermined query. For MongoDB, query is on primary records. For MySQL, query is on secondary records.
 

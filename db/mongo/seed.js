@@ -53,10 +53,9 @@ const randomizeListing = listings => {
 mongoose
   .connect(CONNECTION_URI, { useNewUrlParser: true })
   .then(async () => {
-    console.log('>>>>>>>> connected <<<<<<<<')
+    console.log('MongoDB connection established.');
 
     const time = Date.now();
-
     const listings = generateListing();
 
     while (inserted < itemsToInsert) {
