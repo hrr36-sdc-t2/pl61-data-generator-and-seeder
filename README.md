@@ -2,11 +2,11 @@
 Generates fake data for seeding into MongoDB or MySQL instances, 10 million primary records with ~95 million secondary records.
 
 MongoDB
-  - data generation and insertion time (2 workers): 100-120 min
+  - data generation and insertion time (2 workers): ~80 min
   - query time (1 record from 10 million primary): ~30 ms
 
 MySQL
-  - data generation and insertion time (4 workers): ~25-30 min
+  - data generation and insertion time (4 workers): ~25 min
   - query time (7-12 records from 95 million secondary): ~50 ms
 
 ## Related Projects
